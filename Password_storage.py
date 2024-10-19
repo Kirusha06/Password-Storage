@@ -15,3 +15,30 @@ def load_passwords(self):
                         password = generate_password()
                     self.password_manager.add_password(service, username, password)
                     self.add_to_table(service, username, password)
+
+    def add_to_table(self, service, username, password):
+        row = self.password_table.rowCount()
+        self.password_table.insertRow(row)
+        self.password_table.setItem(row, 0, QTableWidgetItem(service))
+        self.password_table.setItem(row, 1, QTableWidgetItem(username))
+        self.password_table.setItem(row, 2, QTableWidgetItem(password))
+
+    def search_service(self):
+        search_term = self.search_input.text().lower()
+        filtered_data = {s: u for s, u in self.password_manager.passwords.items() if search_term in s.lower()}
+        self.update_table(filtered_data)
+
+    def update_table(self, data):
+        self.password_table.setRowCount(0)
+        for service, info in data.items():
+            self.add_to_table(service, info["username"], info["password"])
+
+
+class LoginWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.init_ui()
+
+    def init_ui(self):
+        self.setWindowTitle("Вход в систему")
+        self.setGeometry(100, 100, 300, 200)
