@@ -1,4 +1,6 @@
-def load_passwords(self):
+я тогда беру 126-188 строки 
+
+ def load_passwords(self):
         # Загрузка паролей в таблицу
         self.password_table.setRowCount(0)
         for service, data in self.password_manager.passwords.items():
@@ -42,3 +44,22 @@ class LoginWindow(QWidget):
     def init_ui(self):
         self.setWindowTitle("Вход в систему")
         self.setGeometry(100, 100, 300, 200)
+
+        # Устанавливаем стили для окна с цветом #5d8bb8
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #e6f7ff;
+            }
+            QLabel {
+                color: #333;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            QLineEdit {
+                padding: 10px;
+                border: 2px solid #5d8bb8;
+                border-radius: 5px;
+                font-size: 14px;
+                background-color: #ffffff;
+                transition: all 0.3s ease-in-out;
+            }
